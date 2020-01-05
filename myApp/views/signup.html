@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JQuery Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #f2f9ff;
+        display: flex;
+      }
+      #content {
+        box-shadow: 0px 9px 13px -9px rgba(149,150,150,1);
+        flex: 1;
+        margin: 5% 10%;  
+        display: flex;    
+      }
+      #logoSection {
+        flex: 1;
+        background: #e0e9ff;
+        height: 100%;
+      }
+      #logoSection img {
+        width: 70%;
+      }
+      #formSection {
+        flex: 1;
+        background: #fff;
+        height: 100%;
+      }
+      .space-between-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .center {
+        text-align: center;
+      }
+      #form {
+        margin: auto;
+        width: 80%;
+        margin: 10%;
+      }
+      .form-control {
+        width: 100%;
+      }
+      #error {
+        color: red;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="logoSection" class="center">
+        <h2>Signup to Sureclaim</h2>
+        <img src="https://sureclaim.in/image/new-pages/log-in-pg-img-2.png" />
+      </div>
+      <div id="formSection">
+        <h2 class="center">Sureclaim</h2>
+        <div id="form">
+          <p>Name</p>
+          <p>
+            <input id="nameInput" type="text" placeholder="Enter your Name" class="form-control" />
+          </p>
+          <p>Email Address</p>
+          <p>
+            <input type="email" placeholder="Enter Email Address" class="form-control" />
+          </p>
+          <p>Password</p>
+          <p>
+            <input type="password" placeholder="Enter Your Password" class="form-control" />
+          </p>
+          <button class="form-control" id="signupButton">Signup</button>
+          <p id="error"></p>
+          <p class="center">
+            Already have an account?
+          </p>
+          <p class="center">
+            <a href="/login">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+      $('#signupButton').on('click', function() {
+        const data = {
+          name: $('#nameInput').val(),
+          email: $('input[type=email]').val(),
+          password: $('input[type=password]').val()
+        };
+        $.ajax({
+          url: '/signup',
+          data: data,//JSON.stringify(data),
+          type: 'post',
+          success: function(data) {
+            if (data.success) {
+              console.log(data);
+              window.location.href = '/';
+            } else {
+              $('#error').text(data.message);
+            }
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+    });
+  </script>
+</html>

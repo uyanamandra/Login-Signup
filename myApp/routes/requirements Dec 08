@@ -1,0 +1,15 @@
+// security issues
+1. javascript is able to access cookies
+2. we want to restrict the user from manipulating cookies
+
+
+// we'll mock our database
+
+
+// observations
+1. Javascript is not able to access cookies
+2. User is not able to land on home page until he is not logged in
+3. User landed on home page after signup (cookie was set on signup)
+4. We have an API /users giving us list of users in our system
+5. Greeting to user on home page
+6. on logout, server is clearing cookies and user is being redirected to login page
